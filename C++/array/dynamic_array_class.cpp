@@ -136,7 +136,7 @@ int main()
     cout << "Element after pop" << endl;
     obj1.pop();
     obj1.display();
-  
+
     cout << "Element after erase" << endl;
     obj1.erase(1);
     obj1.display();
