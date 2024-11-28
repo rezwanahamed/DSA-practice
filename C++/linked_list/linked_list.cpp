@@ -32,18 +32,20 @@ public:
     void InsertAtHead(int value)
     {
         node *a = CreateNewNode(value);
-
         if (head == NULL)
         {
             head = a;
         }
-
-        // if head is not null then
         else
         {
             a->next = head;
             head = a;
         }
+        cout << "Inserted: " << value << ", New Head: " << head->data;
+        if (head->next)
+            cout << ", Next: " << head->next->data << endl;
+        else
+            cout << ", Next: NULL" << endl;
     }
 
     // print the linkedlist
