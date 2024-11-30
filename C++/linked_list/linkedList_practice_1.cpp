@@ -223,6 +223,24 @@ public:
         delete currentNode;
         size--;
     }
+
+    // get head
+    node *getHead()
+    {
+        return head;
+    }
+
+    // recursive print linkedlist
+    void recursivePrint(node *a)
+    {
+        if (a == NULL)
+        {
+            return;
+        }
+        // recursivePrint(a->next); // print reverse
+        cout << a->data << "->";
+        recursivePrint(a->next); // print forward
+    }
 };
 
 int main()
@@ -246,10 +264,17 @@ int main()
     l1.deleteAtHead();
     l1.getSize();
     l1.print();
-    
+
     l1.deleteAtAnyPosition(1);
     l1.getSize();
+
+    l1.insertAtHead(220);
     l1.print();
+
+    cout << endl;
+    cout << "Recursively print linkedlist" << endl;
+    l1.recursivePrint(l1.getHead());
+    cout << endl;
 
     return 0;
 }
