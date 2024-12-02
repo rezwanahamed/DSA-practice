@@ -121,6 +121,75 @@ public:
 
         size++;
     }
+
+    // delete node
+    void deleteNode(int position)
+    {
+        if (position < 0 || position > size)
+        {
+            cout << "Error boundary reached" << endl;
+            return;
+        }
+        else
+        {
+            int index = 0;
+            node *a = head;
+
+            while (index != position)
+            {
+                a = a->next;
+                index++;
+            }
+
+            node *b = a->previous;
+            node *c = a->next;
+
+            if (b != NULL)
+            {
+                b->next = c;
+            }
+
+            if (c != NULL)
+            {
+                c->previous = b;
+            }
+            delete a;
+            if (index == 0)
+            {
+                head = c;
+            }
+            size--;
+        }
+    }
+
+    // reverse
+    void reverse()
+    {
+        if (head == NULL)
+        {
+            return;
+        }
+
+        node *a = head;
+        int index = 0;
+
+        while (index < size - 1)
+        {
+            a = a->next;
+            index++;
+        }
+        // a became the last index
+
+        node *b = head;
+        while (b != NULL)
+        {
+            swap(b->previous, b->next);
+            b = b->previous;
+        }
+
+        head = a;
+        print();
+    }
 };
 
 int main()
@@ -135,12 +204,22 @@ int main()
     dl1.printSize();
 
     cout << endl;
-    cout << "Pint in reverse" << endl;
+    cout << "Reversing the linkedlist using recursion" << endl;
     dl1.printreverse();
+
+    cout << endl;
+    cout << "Reversing the linkedlist using reverse function" << endl;
+    dl1.reverse();
 
     cout << endl;
     cout << "After insert new element:" << endl;
     dl1.insertAtAnyIndex(2, 555);
+    dl1.print();
+    dl1.printSize();
+
+    cout << endl;
+    cout << "After deletion:" << endl;
+    dl1.deleteNode(2);
     dl1.print();
     dl1.printSize();
 

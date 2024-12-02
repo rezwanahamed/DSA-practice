@@ -4,7 +4,6 @@ using namespace std;
 
 int main()
 {
-
     int n;
     cout << "Enter array length: ";
     cin >> n;
@@ -47,6 +46,5 @@ int main()
     {
         cout << arr[i] << " ";
     }
-
     return 0;
 }
