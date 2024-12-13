@@ -49,13 +49,13 @@ int partition(int *arr, int s, int e)
 void quickSort(int *arr, int s, int e)
 {
 
-
     if (s >= e)
     {
         return;
     }
 
     int p = partition(arr, s, e);
+    cout << "P: " << p << endl;
 
     // left part
     quickSort(arr, s, p - 1);
@@ -67,7 +67,7 @@ void quickSort(int *arr, int s, int e)
 };
 int main()
 {
-    int arr[5] = {5,2,4,7,8};
+    int arr[5] = {5, 2, 4, 7, 8};
     int n = 5;
 
     cout << "Before sorting" << endl;
