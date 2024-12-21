@@ -26,7 +26,7 @@ vector<vector<int>> subset(int index, int size, vector<int> &num)
     vector<int> output;     
 
     solve(size, index, num, output, ans);
-
+    
     return ans;
 }
 

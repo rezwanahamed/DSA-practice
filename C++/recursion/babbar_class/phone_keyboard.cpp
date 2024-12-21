@@ -7,7 +7,7 @@ using namespace std;
 // Forward declaration of searchKeysByNumber
 vector<string> searchKeysByNumber(int num);
 
-void solve(int index, vector<vector<string>> &stringArray, vector<string> &output, vector<vector<string>> &ans)
+void solve(int index, vector<vector<string>> stringArray, vector<string> output, vector<vector<string>> &ans)
 {
     if (index >= stringArray.size()) // base case
     {
@@ -15,12 +15,12 @@ void solve(int index, vector<vector<string>> &stringArray, vector<string> &outpu
         return;
     }
 
-    // For each character in current digit's mapping
-    for (string str : stringArray[index]) // iterate through the elements
+    // recursive call
+    for (string strArr : stringArray[index])
     {
-        output.push_back(str);
+        output.push_back(strArr);
         solve(index + 1, stringArray, output, ans);
-        output.pop_back(); // backtrack
+        output.pop_back(); // clear the previous data
     }
 }
 
@@ -69,7 +69,7 @@ int main()
     phoneKeyboard[9] = {"w", "x", "y", "z"};
 
     // call the function
-    vector<int> nums = {2, 3};
+    vector<int> nums = {2, 9};
     int size = nums.size();
 
     /*
@@ -86,7 +86,7 @@ int main()
         {
             cout << element << " ";
         }
-        cout << " ]" << endl;
+        cout << "]" << endl;
     }
 
     return 0;

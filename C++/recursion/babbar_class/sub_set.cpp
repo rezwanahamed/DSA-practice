@@ -1,77 +1,49 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-class Solution {
-private:
-    void debugPrint(const vector<int>& nums, const vector<int>& output, int index, const vector<vector<int>>& ans) {
-        cout << "Current Call:" << endl;
-        cout << "  Current Index: " << index << endl;
-        
-        // Print current output (current subset being built)
-        cout << "  Current Output: [ ";
-        for (int num : output) {
-            cout << num << " ";
-        }
-        cout << "]" << endl;
-        
-        // Print current ans vector
-        cout << "  Current ans Vector:" << endl;
-        for (const auto& subset : ans) {
-            cout << "    [ ";
-            for (int num : subset) {
-                cout << num << " ";
-            }
-            cout << "]" << endl;
-        }
-        cout << "-------------------" << endl;
+
+void solve(int size, int index, vector<int> num, vector<int> output, vector<vector<int>> &ans)
+{
+    if (index >= size)
+    {
+        ans.push_back(output);
+        return;
     }
 
-    void solve(vector<int>& nums, vector<int>& output, int index, vector<vector<int>>& ans) {
-        // Base case: reached end of array
-        if (index >= nums.size()) {
-            // Add current output (subset) to answer vector
-            ans.push_back(output);
-            
-            // Debug print to show vector population
-            debugPrint(nums, output, index, ans);
-            return;
-        }
+    // exclude
+    solve(size, index + 1, num, output, ans);
 
-        // Scenario 1: Exclude current element
-        solve(nums, output, index + 1, ans);
+    // include
+    int element = num[index];
+    output.push_back(element);
+    solve(size, index + 1, num, output, ans);
+}
 
-        // Scenario 2: Include current element
-        output.push_back(nums[index]);
-        solve(nums, output, index + 1, ans);
+vector<vector<int>> subset(int size, int index, vector<int> num)
+{
+    vector<vector<int>> ans;
+    vector<int> output;
+    solve(size, index, num, output, ans);
 
-        // Backtrack: remove last added element to explore other combinations
-        if (!output.empty()) {
-            output.pop_back();
-        }
-    }
+    return ans;
+}
 
-public:
-    vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> output;
-        solve(nums, output, 0, ans);
-        return ans;
-    }
-};
+int main()
+{
+    vector<int> num = {1, 2, 3};
+    int size = num.size();
 
-int main() {
-    vector<int> nums = {1, 2, 3};
-    Solution sol;
-    vector<vector<int>> result = sol.subsets(nums);
-
-    // Print final result
-    cout << "Final Subsets:" << endl;
-    for (const auto& subset : result) {
+    vector<vector<int>> result = subset(size, 0, num);
+    // print the elements
+    for (vector<int> &arr1 : result)
+    {
         cout << "[ ";
-        for (int num : subset) {
-            cout << num << " ";
+        for (int element : arr1)
+        {
+            cout << element<<" ";
         }
-        cout << "]" << endl;
+        cout << "]";
+        cout << endl;
     }
 
     return 0;
