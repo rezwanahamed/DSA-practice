@@ -28,7 +28,7 @@ public:
 int main()
 {
     Solution obj1;
-    int result = obj1.reverse(-1534236469);
+    int result = obj1.reverse(-121);
 
     cout << result << endl;
     return 0;

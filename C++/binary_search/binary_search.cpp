@@ -1,56 +1,38 @@
 #include <iostream>
-#include <bits/stdc++.h>
+#include <vector>
 using namespace std;
 
-int main()
-{
-    int n, k;
-    bool flage = false;
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int start = 0;
+        int end = nums.size()-1;
+        int mid = start + (end - start)/2;
 
-    cout << "Enter array length: ";
-    cin >> n;
+        while(start<=end){
+            if(nums[mid] == target){
+                return mid;
+            }
 
-    vector<int>
-        arr(n);
+            if(nums[mid]>target){
+                end = mid-1;
+            }
 
-    // enter element in array
-    for (int i = 0; i < n; i++)
-    {
-        cout << "Enter element for " << i << " position --> ";
-        cin >> arr[i];
-    }
+            if(nums[mid]<target){
+                start = mid+1;
+            }
 
-    // search element array
-    cout << endl;
-    int low = 0, high = n - 1;
-    cout << "Enter your search element: ";
-    cin >> k;
-    cout << endl;
-
-    while (low <= high)
-    {
-        int mid = (low + high) / 2;
-        if (arr[mid] == k)
-        {
-            cout << "Element " << k << " is found at position " << mid + 1 << endl;
-            flage = true;
-            break;
+            mid = start + (end - start)/2;
         }
 
-        if (arr[mid] > k)
-        {
-            high = mid - 1;
-        }
-
-        if (arr[mid] < k)
-        {
-            low = mid + 1;
-        }
+        return -1;
     }
-    if (flage == false)
-    {
-        cout << "Element not found" << endl;
-    }
+};
 
+int main() {
+    Solution obj1;
+    vector<int>arr={-1,0,3,5,9,12};
+    int result = obj1.search(arr, 9);
+    cout<<"result: "<<result; 
     return 0;
 }
